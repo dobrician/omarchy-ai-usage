@@ -167,9 +167,19 @@ function defaultCompare(a, b) {
   return String(a.name).localeCompare(String(b.name))
 }
 
-function sortEntries(entries, providerOrder) {
+// Settings read back from shell.json arrive as a QML sequence, which is
+// array-like but not an Array; anything else is no order at all.
+function orderList(value) {
+  if (!value || typeof value !== "object" || typeof value.length !== "number") return null
+  var out = []
+  for (var i = 0; i < value.length; i++) out.push(String(value[i]))
+  return out
+}
+
+function sortEntries(entries, order) {
   var rest = entries.slice().sort(defaultCompare)
-  if (!Array.isArray(providerOrder)) return rest
+  var providerOrder = orderList(order)
+  if (!providerOrder) return rest
   var ordered = []
   for (var i = 0; i < providerOrder.length; i++) {
     for (var j = 0; j < rest.length; j++) {
@@ -251,7 +261,7 @@ function ignorePatch(id, enabled) {
 
 function moveInOrder(order, ids, id, delta) {
   var effective = []
-  var source = Array.isArray(order) ? order : []
+  var source = orderList(order) || []
   for (var i = 0; i < source.length; i++) {
     if (ids.indexOf(source[i]) >= 0 && effective.indexOf(source[i]) < 0) effective.push(source[i])
   }

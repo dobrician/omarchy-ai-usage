@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "dc.ai-usage",
   "name": "AI Usage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Ciprian Dobrea",
   "license": "MIT",
   "homepage": "https://github.com/dobrician/omarchy-ai-usage",

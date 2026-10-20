@@ -414,3 +414,12 @@ test('warningColor prefers orange, then a yellow that stands out, then accent', 
   assert.equal(Model.warningColor({ yellow: '#d9dbdc' }, '#dadbdc', '#5e81ac'), '#5e81ac')
   assert.equal(Model.warningColor({}, '#ffffff', '#123456'), '#123456')
 })
+
+test('an order read back from shell.json works as a QML sequence too', () => {
+  // QML hands JSON arrays from shell.json over as V4Sequence, which is
+  // array-like but fails Array.isArray.
+  const seq = { length: 2, 0: 'openai', 1: 'anthropic' }
+  const e = ['anthropic', 'openai'].map((id) => ({ id, vendor: id, name: id, plan: '' }))
+  assert.deepEqual(Model.sortEntries(e, seq).map((x) => x.id), ['openai', 'anthropic'])
+  assert.deepEqual(Model.moveInOrder(seq, ['openai', 'anthropic'], 'anthropic', -1), ['anthropic', 'openai'])
+})

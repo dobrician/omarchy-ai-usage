@@ -31,7 +31,7 @@ BarWidget {
   }
   property bool tooltipShown: false
   property bool settingsOpen: false
-  readonly property var orderedRows: service ? Model.sortEntries(service.vendorRows, Array.isArray(settings.providerOrder) ? settings.providerOrder : undefined) : []
+  readonly property var orderedRows: service ? Model.sortEntries(service.vendorRows, settings.providerOrder) : []
 
   onServiceChanged: if (service) service.configure(settings)
   onSettingsChanged: if (service) service.configure(settings)
