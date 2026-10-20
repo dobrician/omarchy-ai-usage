@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Stand-in for ai-usagebar used for manual robustness checks in the bar.
+# Mode comes from ~/.cache/dc.ai-usage/fake-mode: ok, states, slow, fail,
+# garbage, apply-fail, preview. Applied patches are appended to apply.log there.
+set -uo pipefail
+here=$(cd "$(dirname "$0")" && pwd)
+state="${XDG_CACHE_HOME:-$HOME/.cache}/dc.ai-usage"
+mkdir -p "$state"
+mode=$(cat "$state/fake-mode" 2>/dev/null || echo ok)
+
+case "${1:-} ${2:-}" in
+  "detect "*) echo '{"enabled":[]}'; exit 0 ;;
+  "vendors "*) cat "$here/fixtures/vendors.json"; exit 0 ;;
+  "settings apply")
+    read -r line
+    echo "$line" >> "$state/apply.log"
+    [ "$mode" = "apply-fail" ] && { echo "apply refused" >&2; exit 2; }
+    exit 0 ;;
+  "usage "*)
+    case "$mode" in
+      slow) sleep 60 ;;
+      fail) echo "boom" >&2; exit 2 ;;
+      garbage) echo "not json"; exit 0 ;;
+      states) exec python3 -I "$here/fake-states.py" ;;
+      preview) exec python3 -I "$here/fake-states.py" preview ;;
+    esac
+    cat "$here/fixtures/usage.json"; exit 0 ;;
+esac
+echo "fake-ai-usagebar: unsupported $*" >&2
+exit 64

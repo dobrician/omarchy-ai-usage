@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "dc.ai-usage",
+  "name": "AI Usage",
+  "version": "1.0.0",
+  "author": "Ciprian Dobrea",
+  "license": "MIT",
+  "homepage": "https://github.com/dobrician/omarchy-ai-usage",
+  "description": "Weekly and short-window AI plan usage per provider (Claude, Codex, Grok, Antigravity and more), colored by pace. Uses ai-usagebar.",
+  "kinds": [
+    "bar-widget",
+    "service"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml",
+    "service": "Service.qml"
+  },
+  "barWidget": {
+    "displayName": "AI Usage",
+    "description": "Claude, Codex, Grok, Antigravity and other AI plan limits at a glance.",
+    "category": "AI",
+    "aliases": [
+      "ai-usage",
+      "agent-usage",
+      "claude",
+      "codex",
+      "grok",
+      "antigravity"
+    ],
+    "allowMultiple": false,
+    "defaultSection": "left",
+    "defaults": {
+      "displayMode": "name",
+      "refreshIntervalSec": 300,
+      "binary": "ai-usagebar"
+    },
+    "schema": [
+      {
+        "key": "displayMode",
+        "type": "enum",
+        "label": "Display",
+        "options": [
+          "name",
+          "values"
+        ],
+        "defaultValue": "name"
+      },
+      {
+        "key": "refreshIntervalSec",
+        "type": "integer",
+        "label": "Refresh interval (s)",
+        "min": 300,
+        "max": 3600,
+        "defaultValue": 300
+      },
+      {
+        "key": "binary",
+        "type": "path",
+        "label": "ai-usagebar binary",
+        "defaultValue": "ai-usagebar"
+      }
+    ]
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "entries": [
+    {
+      "brand": "anthropic",
+      "display_name": "Claude",
+      "error": null,
+      "fetched_at": "2026-10-20T08:20:02.636565311Z",
+      "icon": "󰚩",
+      "id": "anthropic",
+      "metrics": [
+        {
+          "detail": "Resets in 2h 00m · 59% elapsed · 48pts under",
+          "headline": "percent",
+          "label": "Session (5h)",
+          "percent": 11,
+          "reset_at": "2026-10-20T10:40:00.479135Z",
+          "severity": "low",
+          "value": "11%",
+          "window_secs": 18000
+        },
+        {
+          "detail": "Resets in 2d 0h · 71% elapsed · 22pts under",
+          "headline": "percent",
+          "label": "Weekly (7d)",
+          "percent": 49,
+          "reset_at": "2026-10-22T09:00:00.479151Z",
+          "severity": "low",
+          "value": "49%",
+          "window_secs": 604800
+        },
+        {
+          "detail": "Resets in 2d 0h",
+          "headline": "percent",
+          "label": "Fable (7d)",
+          "percent": 31,
+          "reset_at": "2026-10-22T09:00:00.479286Z",
+          "severity": "low",
+          "value": "31%",
+          "window_secs": 604800
+        }
+      ],
+      "name": "anthropic",
+      "plan": "Claude Max 20x",
+      "reset_credits": null,
+      "short_name": "cld",
+      "stale": true,
+      "status": "ready"
+    },
+    {
+      "brand": "openai",
+      "display_name": "Codex",
+      "error": null,
+      "fetched_at": "2026-10-20T08:39:14.544036689Z",
+      "icon": "󱢆",
+      "id": "openai",
+      "metrics": [
+        {
+          "detail": "Resets in 6d 21h · 1% elapsed · 1pts ahead",
+          "headline": "percent",
+          "label": "Codex weekly",
+          "percent": 2,
+          "reset_at": "2026-10-27T06:33:16Z",
+          "severity": "low",
+          "value": "2%",
+          "window_secs": 604800
+        }
+      ],
+      "name": "openai",
+      "plan": "ChatGPT Pro",
+      "reset_credits": null,
+      "short_name": "gpt",
+      "stale": false,
+      "status": "ready"
+    },
+    {
+      "brand": "supergrok",
+      "display_name": "SuperGrok",
+      "error": null,
+      "fetched_at": "2026-10-20T08:39:15.225608091Z",
+      "icon": "󰇷",
+      "id": "supergrok",
+      "metrics": [
+        {
+          "detail": "Resets in 23h 27m · 86% elapsed · 49pts under",
+          "headline": "percent",
+          "label": "Weekly usage",
+          "percent": 37,
+          "reset_at": "2026-10-21T08:07:11.084Z",
+          "severity": "low",
+          "value": "37%",
+          "window_secs": 604800
+        },
+        {
+          "detail": "",
+          "group": "Breakdown",
+          "headline": "percent",
+          "label": "Grok Bot",
+          "percent": 27,
+          "reset_at": null,
+          "severity": "low",
+          "value": "27%"
+        },
+        {
+          "detail": "",
+          "group": "Breakdown",
+          "headline": "percent",
+          "label": "Grok Build",
+          "percent": 10,
+          "reset_at": null,
+          "severity": "low",
+          "value": "10%"
+        }
+      ],
+      "name": "supergrok",
+      "plan": "SuperGrok Plus",
+      "reset_credits": null,
+      "short_name": "sgk",
+      "stale": false,
+      "status": "ready"
+    },
+    {
+      "brand": "antigravity",
+      "display_name": "Antigravity",
+      "error": null,
+      "fetched_at": "2026-10-20T08:39:19.208376053Z",
+      "icon": "agy",
+      "id": "antigravity",
+      "metrics": [
+        {
+          "detail": "Resets in 1h 41m",
+          "headline": "percent",
+          "label": "Gemini",
+          "percent": 0,
+          "reset_at": "2026-10-20T10:21:02Z",
+          "severity": "low",
+          "value": "0%",
+          "window_secs": 18000
+        },
+        {
+          "detail": "Resets in 4h 59m",
+          "headline": "percent",
+          "label": "Claude & GPT OSS",
+          "percent": 0,
+          "reset_at": "2026-10-20T13:39:18Z",
+          "severity": "low",
+          "value": "0%",
+          "window_secs": 18000
+        },
+        {
+          "detail": "Resets in 4d 12h",
+          "headline": "percent",
+          "label": "Gemini",
+          "percent": 0,
+          "reset_at": "2026-10-24T21:21:01Z",
+          "severity": "low",
+          "value": "0%",
+          "window_secs": 604800
+        },
+        {
+          "detail": "Resets in 3d 15h",
+          "headline": "percent",
+          "label": "Gemini 4 Argon",
+          "model_pool": true,
+          "percent": 100,
+          "reset_at": "2026-10-24T00:02:22Z",
+          "severity": "critical",
+          "value": "100%",
+          "window_secs": 604800
+        },
+        {
+          "detail": "Resets in 6d 23h",
+          "headline": "percent",
+          "label": "Claude & GPT OSS",
+          "percent": 0,
+          "reset_at": "2026-10-27T08:39:18Z",
+          "severity": "low",
+          "value": "0%",
+          "window_secs": 604800
+        }
+      ],
+      "name": "antigravity",
+      "plan": "Antigravity",
+      "reset_credits": null,
+      "short_name": "agy",
+      "stale": false,
+      "status": "ready"
+    }
+  ],
+  "primary": "anthropic",
+  "schema_version": 1
+}

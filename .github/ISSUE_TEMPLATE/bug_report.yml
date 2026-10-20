@@ -1,0 +1,28 @@
+name: Bug report
+description: Something in the AI Usage widget looks or behaves wrong.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead. A screenshot of the bar or the tooltip helps.
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Widget status
+      description: Output of `omarchy-shell dc.ai-usage status`.
+      render: json
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Output of `ai-usagebar --version` and `omarchy version`.
+  - type: textarea
+    id: usage
+    attributes:
+      label: Provider data (optional)
+      description: The entry of the affected provider from `ai-usagebar usage --json`. It holds no secrets, but check it before pasting.
+      render: json
