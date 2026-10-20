@@ -17,7 +17,7 @@ Item {
   property bool snapshotStale: false
   property string lastError: ""
   property var rawEntries: []
-  readonly property var entries: Model.sortEntries(rawEntries, settings.providerOrder)
+  readonly property var entries: Model.sortEntries(Model.mergeSharedPools(rawEntries), settings.providerOrder)
   property string vendorsJson: ""
   property bool vendorsLoaded: false
   // Derived, so a plan or glyph that arrives with a later usage read shows up.

@@ -423,3 +423,31 @@ test('an order read back from shell.json works as a QML sequence too', () => {
   assert.deepEqual(Model.sortEntries(e, seq).map((x) => x.id), ['openai', 'anthropic'])
   assert.deepEqual(Model.moveInOrder(seq, ['openai', 'anthropic'], 'anthropic', -1), ['anthropic', 'openai'])
 })
+
+function grokPair(botReset, botPercent = 42, botExtra = {}) {
+  return JSON.stringify({ schema_version: 1, entries: [
+    { id: 'supergrok', display_name: 'SuperGrok', plan: 'SuperGrok Plus', metrics: [
+      { label: 'Weekly usage', percent: 41, reset_at: '2026-10-21T08:07:11.084Z', window_secs: WEEK },
+      { label: 'Grok Bot', percent: 30 }] },
+    Object.assign({ id: 'grokbot', display_name: 'Grok Bot', plan: 'Grok Bot Plan', metrics: [
+      { label: 'Weekly', percent: botPercent, reset_at: botReset, window_secs: WEEK }] }, botExtra)
+  ] })
+}
+
+test('Grok and Grok Bot on one weekly pool show as one Grok', () => {
+  const merged = Model.mergeSharedPools(Model.parseUsage(grokPair('2026-10-21T08:07:11.084Z')).entries)
+  assert.deepEqual(merged.map((e) => e.id), ['supergrok'])
+  assert.equal(merged[0].name, 'Grok')
+  assert.equal(merged[0].plan, 'SuperGrok Plus')
+  assert.equal(Model.resolveEntry(merged[0], NOW).weekly.percent, 42)
+})
+
+test('Grok Bot on its own Cursor grant stays a separate provider', () => {
+  const entries = Model.parseUsage(grokPair('2026-10-23T00:00:00Z', 12)).entries
+  assert.deepEqual(Model.mergeSharedPools(entries).map((e) => e.id), ['supergrok', 'grokbot'])
+})
+
+test('a pool is not merged while one side has no weekly window', () => {
+  const entries = Model.parseUsage(grokPair('2026-10-21T08:07:11.084Z', 42, { metrics: [], error: 'needs login' })).entries
+  assert.deepEqual(Model.mergeSharedPools(entries).map((e) => e.id), ['supergrok', 'grokbot'])
+})

@@ -137,6 +137,49 @@ function resolveEntry(entry, nowMs) {
   }
 }
 
+// On The X Subscription, and on a SuperGrok plan linked in Grok Bot, the Grok
+// apps, Grok Bot and Cursor draw from one weekly pool that ai-usagebar reports
+// twice. Same reset means same pool: show it once, as Grok, at the higher
+// reading. Grok Bot on its own Cursor grant resets elsewhere and stays apart.
+var SHARED_POOLS = [{ into: "supergrok", from: "grokbot" }]
+var SAME_RESET_MS = 60000
+
+function sharesWeekly(a, b) {
+  for (var i = 0; i < a.candidates.long.length; i++) {
+    for (var j = 0; j < b.candidates.long.length; j++) {
+      if (Math.abs(a.candidates.long[i].resetAt - b.candidates.long[j].resetAt) <= SAME_RESET_MS)
+        return { mine: a.candidates.long[i], theirs: b.candidates.long[j] }
+    }
+  }
+  return null
+}
+
+function mergeSharedPools(entries) {
+  var out = entries.slice()
+  for (var p = 0; p < SHARED_POOLS.length; p++) {
+    var into = -1, from = -1
+    for (var i = 0; i < out.length; i++) {
+      if (out[i].id === SHARED_POOLS[p].into) into = i
+      if (out[i].id === SHARED_POOLS[p].from) from = i
+    }
+    if (into < 0 || from < 0) continue
+    var a = out[into], b = out[from]
+    var pair = sharesWeekly(a, b)
+    if (!pair) continue
+    var weekly = pair.theirs.percent > pair.mine.percent ? pair.theirs : pair.mine
+    var merged = {}
+    for (var k in a) merged[k] = a[k]
+    merged.plan = a.plan || b.plan
+    merged.stale = a.stale && b.stale
+    merged.candidates = {}
+    for (var c in a.candidates) merged.candidates[c] = a.candidates[c]
+    merged.candidates.long = [weekly]
+    out[into] = merged
+    out.splice(from, 1)
+  }
+  return out
+}
+
 var PRICES = [
   [/SuperGrok Heavy/i, 300],
   [/AI Ultra/i, 250],
