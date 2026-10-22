@@ -37,6 +37,7 @@ Item {
   }
 
   Text {
+    textFormat: Text.PlainText
     anchors.centerIn: parent
     visible: !root.hasAsset
     text: root.glyph !== "" ? root.glyph : "\u{F16A3}"

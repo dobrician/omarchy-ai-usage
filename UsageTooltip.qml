@@ -82,12 +82,14 @@ PopupWindow {
         readonly property color tone: root.issue && root.theme ? root.theme.colorFor(root.issue.state) : Commons.Color.tooltip.text
 
         Text {
+          textFormat: Text.PlainText
           text: root.issue ? root.issue.glyph : ""
           color: parent.tone
           font.family: root.fontFamily
           font.pixelSize: Style.font.bodySmall
         }
         Text {
+          textFormat: Text.PlainText
           text: root.issue ? root.issue.text : ""
           color: parent.tone
           font.family: root.fontFamily
@@ -105,24 +107,28 @@ PopupWindow {
           spacing: Style.space(7)
 
           Text {
+            textFormat: Text.PlainText
             text: modelData.glyph
             color: Qt.darker(Commons.Color.tooltip.text, 1.55)
             font.family: root.fontFamily
             font.pixelSize: Style.font.bodySmall
           }
           Text {
+            textFormat: Text.PlainText
             text: Math.round(modelData.state.percent) + "%"
             color: parent.tone
             font.family: root.fontFamily
             font.pixelSize: Style.font.bodySmall
           }
           Text {
+            textFormat: Text.PlainText
             text: "\u{F0954}"
             color: parent.tone
             font.family: root.fontFamily
             font.pixelSize: Style.font.bodySmall
           }
           Text {
+            textFormat: Text.PlainText
             text: Model.formatLong(modelData.state.remainingMs)
             color: parent.tone
             font.family: root.fontFamily

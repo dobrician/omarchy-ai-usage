@@ -75,6 +75,7 @@ KeyboardPanel {
       }
 
       Text {
+        textFormat: Text.PlainText
         visible: root.rows.length === 0
         width: parent.width
         wrapMode: Text.WordWrap
@@ -143,6 +144,7 @@ KeyboardPanel {
                 }
                 Text {
                   id: nameText
+                  textFormat: Text.PlainText
                   anchors.verticalCenter: parent.verticalCenter
                   text: rowItem.modelData.name
                   color: root.foreground
@@ -150,6 +152,7 @@ KeyboardPanel {
                   font.pixelSize: Style.font.body
                 }
                 Text {
+                  textFormat: Text.PlainText
                   anchors.verticalCenter: parent.verticalCenter
                   width: Math.max(0, labelRow.width - nameText.width - Style.space(12) - labelRow.spacing * 2)
                   elide: Text.ElideRight

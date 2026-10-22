@@ -62,6 +62,7 @@ WidgetButton {
 
       Text {
         id: base
+        textFormat: Text.PlainText
         text: root.labelText
         color: root.shortAlert ? root.withAlpha(root.shortColor, 0.38) : root.normalColor
         font.family: root.fontFamily
@@ -76,6 +77,7 @@ WidgetButton {
         clip: true
 
         Text {
+          textFormat: Text.PlainText
           text: root.labelText
           color: root.shortColor
           font: base.font
